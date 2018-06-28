@@ -3,10 +3,13 @@ package common
 import "log"
 
 // CheckError is used for log error
-func CheckError(err error) {
+// Return true if error not nil
+func CheckError(err error) bool {
 	if err != nil {
 		log.Println("error:", err)
+		return true
 	}
+	return false
 }
 
 // CheckErrorFatal is used for log error and exit
@@ -17,8 +20,12 @@ func CheckErrorFatal(err error) {
 }
 
 // CheckErrorMessage is used for log error with custom message
-func CheckErrorMessage(message string, err error) {
+// Return true if error not nil
+func CheckErrorMessage(message string, err error) bool {
 	if err != nil {
 		log.Println(message, err)
+		return true
 	}
+
+	return false
 }

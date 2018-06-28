@@ -42,10 +42,10 @@ func TestCheckErrorFatal(t *testing.T) {
 func TestCheckErrorFatalNoError(t *testing.T) {
 
 	err := getNilError()
+	test := true
 
 	common.CheckErrorFatal(err)
 
-	test := true
 	assert.Equal(t, true, test)
 
 }
@@ -60,10 +60,11 @@ func TestCheckErrorMessage(t *testing.T) {
 
 	err := getError()
 
-	common.CheckErrorMessage("error fired:", err)
+	isError := common.CheckErrorMessage("error fired:", err)
 
 	expect := time.Now().Format(layout) + " error fired: test error\n"
 	assert.Equal(t, expect, buf.String())
+	assert.Equal(t, true, isError)
 
 }
 
@@ -77,9 +78,10 @@ func TestCheckErrorMessageNoError(t *testing.T) {
 
 	err := getNilError()
 
-	common.CheckErrorMessage("not printed", err)
+	isError := common.CheckErrorMessage("not printed", err)
 
 	assert.Equal(t, "", buf.String())
+	assert.Equal(t, false, isError)
 
 }
 
@@ -93,10 +95,11 @@ func TestCheckError(t *testing.T) {
 
 	err := getError()
 
-	common.CheckError(err)
+	isError := common.CheckError(err)
 
 	expect := time.Now().Format(layout) + " error: test error\n"
 	assert.Equal(t, expect, buf.String())
+	assert.Equal(t, true, isError)
 
 }
 
@@ -110,9 +113,10 @@ func TestCheckErrorNoError(t *testing.T) {
 
 	err := getNilError()
 
-	common.CheckError(err)
+	isError := common.CheckError(err)
 
 	assert.Equal(t, "", buf.String())
+	assert.Equal(t, false, isError)
 }
 
 func getNilError() error {
