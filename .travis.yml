@@ -14,4 +14,4 @@ jobs:
       script:
       - go get -v -d
       - go get github.com/stretchr/testify/assert
-      - go test -v -cover
+      - go test -v -cover ./...
