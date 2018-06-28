@@ -26,6 +26,5 @@ func CheckErrorMessage(message string, err error) bool {
 		log.Println(message, err)
 		return true
 	}
-
 	return false
 }
